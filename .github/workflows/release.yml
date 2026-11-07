@@ -1,0 +1,141 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - 'v*'
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: 'Existing tag to release (e.g. v1.0.0)'
+        required: true
+
+permissions:
+  contents: write
+  packages: write
+
+jobs:
+  verify:
+    name: Verify version and tests
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up JDK 17
+        uses: actions/setup-java@v4
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+
+      - name: Set up Android SDK
+        uses: android-actions/setup-android@v3
+
+      - name: Set up Gradle
+        uses: gradle/actions/setup-gradle@v4
+
+      - name: Grant execute permission for gradlew
+        run: chmod +x gradlew
+
+      - name: Verify tag matches VERSION_NAME
+        run: |
+          set -euo pipefail
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+            REF="${{ github.event.inputs.tag }}"
+          else
+            REF="${GITHUB_REF_NAME}"
+          fi
+          TAG_VERSION="${REF#v}"
+          PROP_VERSION="$(grep -E '^VERSION_NAME=' gradle.properties | cut -d= -f2 | tr -d '[:space:]')"
+          echo "Tag version:      ${TAG_VERSION}"
+          echo "gradle.properties: ${PROP_VERSION}"
+          if [ "${TAG_VERSION}" != "${PROP_VERSION}" ]; then
+            echo "::error::Tag ${REF} does not match VERSION_NAME=${PROP_VERSION} in gradle.properties"
+            exit 1
+          fi
+
+      - name: Run unit tests
+        run: ./gradlew :crash-guard:testDebugUnitTest --stacktrace
+
+      - name: Assemble release AAR
+        run: ./gradlew :crash-guard:assembleRelease --stacktrace
+
+      - name: Publish to Maven Local (validates POM)
+        run: ./gradlew :crash-guard:publishReleasePublicationToMavenLocal --stacktrace
+
+      - name: Verify published artifacts
+        run: |
+          set -euo pipefail
+          BASE="$HOME/.m2/repository/com/roni/library/crash-guard"
+          VERSION="$(grep -E '^VERSION_NAME=' gradle.properties | cut -d= -f2 | tr -d '[:space:]')"
+          echo "Looking in ${BASE}/${VERSION}"
+          ls -la "${BASE}/${VERSION}"
+          test -f "${BASE}/${VERSION}/crash-guard-${VERSION}.aar"
+          test -f "${BASE}/${VERSION}/crash-guard-${VERSION}.pom"
+          test -f "${BASE}/${VERSION}/crash-guard-${VERSION}-sources.jar"
+
+      - name: Upload AAR
+        uses: actions/upload-artifact@v4
+        with:
+          name: release-aar
+          path: crash-guard/build/outputs/aar/*.aar
+          if-no-files-found: error
+
+  publish-github-packages:
+    name: Publish to GitHub Packages
+    needs: verify
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up JDK 17
+        uses: actions/setup-java@v4
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+
+      - name: Set up Android SDK
+        uses: android-actions/setup-android@v3
+
+      - name: Set up Gradle
+        uses: gradle/actions/setup-gradle@v4
+
+      - name: Grant execute permission for gradlew
+        run: chmod +x gradlew
+
+      - name: Publish to GitHub Packages
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_ACTOR: ${{ github.actor }}
+          GITHUB_REPOSITORY: ${{ github.repository }}
+        run: ./gradlew :crash-guard:publishReleasePublicationToGitHubPackagesRepository --stacktrace
+
+  github-release:
+    name: Create GitHub Release
+    needs: verify
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Download AAR artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: release-aar
+          path: dist
+
+      - name: Create Release
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: ${{ github.event_name == 'workflow_dispatch' && github.event.inputs.tag || github.ref_name }}
+          name: CrashGuard ${{ github.event_name == 'workflow_dispatch' && github.event.inputs.tag || github.ref_name }}
+          generate_release_notes: true
+          files: dist/*.aar
+          fail_on_unmatched_files: true

@@ -1,0 +1,41 @@
+<resources>
+    <string name="crashguard_app_name">CrashGuard</string>
+    <string name="crashguard_badge_text">ক্র্যাশ শনাক্ত হয়েছে</string>
+    <string name="crashguard_crash_title">অ্যাপ্লিকেশনে একটি সমস্যা হয়েছে</string>
+    <string name="crashguard_crash_subtitle">একটি অপ্রত্যাশিত ত্রুটি ঘটেছে। অ্যাপের অবস্থা সংরক্ষণ করা হয়েছে এবং ডায়াগনস্টিক তথ্য সংগ্রহ করা হয়েছে।</string>
+
+    <string name="crashguard_btn_restart">অ্যাপ পুনরায় চালু করুন</string>
+    <string name="crashguard_btn_close">অ্যাপ বন্ধ করুন</string>
+    <string name="crashguard_btn_copy">রিপোর্ট কপি করুন</string>
+    <string name="crashguard_btn_share">ডায়াগনস্টিক শেয়ার করুন</string>
+    <string name="crashguard_btn_delete">রিপোর্ট মুছে ফেলুন</string>
+
+    <string name="crashguard_section_meta">ডিভাইস ও সেশন</string>
+    <string name="crashguard_section_breadcrumbs">সাম্প্রতিক ব্রেডক্রাম্ব</string>
+    <string name="crashguard_section_stacktrace">স্ট্যাক ট্রেস</string>
+
+    <string name="crashguard_meta_time">সময়</string>
+    <string name="crashguard_meta_type">ধরন</string>
+    <string name="crashguard_meta_thread">থ্রেড</string>
+    <string name="crashguard_meta_app">অ্যাপ</string>
+    <string name="crashguard_meta_device">ডিভাইস</string>
+    <string name="crashguard_meta_os">অপারেটিং সিস্টেম</string>
+    <string name="crashguard_meta_ram">র‍্যাম (MB)</string>
+    <string name="crashguard_meta_storage">স্টোরেজ (MB)</string>
+
+    <string name="crashguard_no_breadcrumbs">ক্র্যাশের আগে কোনো ব্রেডক্রাম্ব রেকর্ড হয়নি।</string>
+    <string name="crashguard_report_unavailable">ক্র্যাশ রিপোর্ট পাওয়া যায়নি</string>
+    <string name="crashguard_report_unavailable_desc">ডিস্ক থেকে ক্র্যাশ তথ্য লোড করা সম্ভব হয়নি।</string>
+    <string name="crashguard_report_deleted">ক্র্যাশ রিপোর্ট মুছে ফেলা হয়েছে</string>
+    <string name="crashguard_copied_to_clipboard">ক্র্যাশ রিপোর্ট ক্লিপবোর্ডে কপি হয়েছে</string>
+
+    <string name="crashguard_notification_channel_name">ক্র্যাশ ডায়াগনস্টিকস</string>
+    <string name="crashguard_notification_channel_desc">শনাক্ত করা ক্র্যাশ ও এক্সেপশনের নোটিফিকেশন</string>
+    <string name="crashguard_notification_title">অ্যাপ ক্র্যাশ শনাক্ত হয়েছে</string>
+    <string name="crashguard_notification_text">ক্র্যাশের বিস্তারিত ও স্ট্যাক ট্রেস দেখতে ট্যাপ করুন।</string>
+
+    <string name="crashguard_tab_summary">সারসংক্ষেপ</string>
+    <string name="crashguard_tab_stacktrace">স্ট্যাক ট্রেস</string>
+    <string name="crashguard_tab_device">ডিভাইস ও ওএস</string>
+    <string name="crashguard_tab_breadcrumbs">ব্রেডক্রাম্ব</string>
+</resources>

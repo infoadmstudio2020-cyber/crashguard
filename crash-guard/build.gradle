@@ -1,0 +1,130 @@
+plugins {
+    id 'com.android.library'
+    id 'maven-publish'
+}
+
+android {
+    namespace 'com.roni.library.crashguard'
+    compileSdk rootProject.ext.compileSdkVersion
+
+    defaultConfig {
+        minSdk rootProject.ext.minSdkVersion
+        targetSdk rootProject.ext.targetSdkVersion
+
+        testInstrumentationRunner 'androidx.test.runner.AndroidJUnitRunner'
+        consumerProguardFiles 'consumer-rules.pro'
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
+    }
+
+    testOptions {
+        // android.jar stubs throw by default; returning defaults lets pure-Java
+        // unit tests exercise model classes without Robolectric.
+        unitTests.returnDefaultValues = true
+        // Required by the Robolectric-backed storage / install tests.
+        unitTests.includeAndroidResources = true
+    }
+
+    lint {
+        abortOnError true
+        checkReleaseBuilds true
+    }
+
+    publishing {
+        singleVariant('release') {
+            withSourcesJar()
+        }
+    }
+}
+
+dependencies {
+    // `api` because AppCompatActivity and the Material theme are part of the
+    // library's public surface (DefaultCrashActivity + crash screen theme).
+    api 'androidx.appcompat:appcompat:1.7.0'
+    api 'com.google.android.material:material:1.12.0'
+    implementation 'androidx.core:core:1.13.1'
+
+    testImplementation 'junit:junit:4.13.2'
+    testImplementation 'org.json:json:20240303'
+    testImplementation 'org.robolectric:robolectric:4.12.2'
+    testImplementation 'androidx.test:core:1.6.1'
+
+    androidTestImplementation 'androidx.test.ext:junit:1.2.1'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.6.1'
+}
+
+// ---------------------------------------------------------------------------
+// Maven publication
+// ---------------------------------------------------------------------------
+def pomGroupId = project.findProperty('GROUP') ?: rootProject.ext.libraryGroup
+def pomArtifactId = project.findProperty('POM_ARTIFACT_ID') ?: rootProject.ext.libraryArtifact
+def pomVersion = project.findProperty('VERSION_NAME') ?: rootProject.ext.libraryVersion
+
+afterEvaluate {
+    publishing {
+        publications {
+            release(MavenPublication) {
+                from components.release
+
+                groupId = pomGroupId
+                artifactId = pomArtifactId
+                version = pomVersion
+
+                pom {
+                    name = project.findProperty('POM_NAME') ?: 'CrashGuard'
+                    description = project.findProperty('POM_DESCRIPTION') ?: 'Android crash guard library.'
+                    url = project.findProperty('POM_URL') ?: 'https://github.com/infoadmstudio2020-cyber/crash-guard'
+
+                    licenses {
+                        license {
+                            name = project.findProperty('POM_LICENSE_NAME') ?: 'The Apache License, Version 2.0'
+                            url = project.findProperty('POM_LICENSE_URL') ?: 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+                        }
+                    }
+
+                    developers {
+                        developer {
+                            id = project.findProperty('POM_DEVELOPER_ID') ?: 'infoadmstudio2020-cyber'
+                            name = project.findProperty('POM_DEVELOPER_NAME') ?: 'MD Roni Hossain'
+                            email = project.findProperty('POM_DEVELOPER_EMAIL') ?: 'mdronihossain305@gmail.com'
+                        }
+                    }
+
+                    scm {
+                        connection = project.findProperty('POM_SCM_CONNECTION')
+                        developerConnection = project.findProperty('POM_SCM_DEV_CONNECTION')
+                        url = project.findProperty('POM_SCM_URL')
+                    }
+                }
+            }
+        }
+
+        // GitHub Packages is only wired up when the CI environment provides
+        // credentials, so a plain local build never fails on missing auth.
+        def ghRepo = System.getenv('GITHUB_REPOSITORY')
+        def ghActor = System.getenv('GITHUB_ACTOR')
+        def ghToken = System.getenv('GITHUB_TOKEN')
+        if (ghRepo && ghActor && ghToken) {
+            repositories {
+                maven {
+                    name = 'GitHubPackages'
+                    url = uri("https://maven.pkg.github.com/${ghRepo}")
+                    credentials {
+                        username = ghActor
+                        password = ghToken
+                    }
+                }
+            }
+        }
+    }
+}

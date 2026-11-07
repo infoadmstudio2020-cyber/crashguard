@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">CrashGuard ডেমো</string>
+
+    <string name="demo_title">CrashGuard ডেমো</string>
+    <string name="demo_subtitle">লাইব্রেরি ইন্টিগ্রেশন ও ক্র্যাশ পরীক্ষা</string>
+
+    <string name="demo_section_status">সিস্টেম স্ট্যাটাস</string>
+    <string name="demo_status_line">অবস্থা: %1$s  •  সংরক্ষিত রিপোর্ট: %2$d</string>
+    <string name="demo_status_installed">ইনস্টল করা হয়েছে</string>
+    <string name="demo_status_not_installed">ইনস্টল করা হয়নি</string>
+    <string name="demo_config_line">ট্যাগ: %1$s  •  ডিবাগ: %2$s  •  অটো-রিস্টার্ট: %3$s\nসর্বোচ্চ রিপোর্ট: %4$d  •  সর্বোচ্চ ব্রেডক্রাম্ব: %5$d</string>
+    <string name="demo_config_unavailable">কনফিগারেশন পাওয়া যায়নি</string>
+    <string name="demo_breadcrumb_line">বর্তমান ব্রেডক্রাম্ব: %1$d</string>
+
+    <string name="demo_section_crash_tests">ক্র্যাশ পরীক্ষা</string>
+    <string name="demo_crash_hint">প্রতিটি বাটন একটি নির্দিষ্ট ক্র্যাশ পরিস্থিতি তৈরি করে। ক্র্যাশের পর CrashGuard-এর রিকভারি স্ক্রিন আসবে।</string>
+
+    <string name="demo_btn_npe">NullPointerException (মেইন থ্রেড)</string>
+    <string name="demo_btn_background">RuntimeException (ব্যাকগ্রাউন্ড থ্রেড)</string>
+    <string name="demo_btn_stack_overflow">StackOverflowError (মেইন থ্রেড)</string>
+    <string name="demo_btn_illegal_state">IllegalStateException (মেইন থ্রেড)</string>
+    <string name="demo_btn_oom">OutOfMemoryError (মেমোরি চাপ)</string>
+    <string name="demo_btn_handled">হ্যান্ডেল করা এক্সেপশন (নন-ফ্যাটাল)</string>
+
+    <string name="demo_section_diagnostics">ডায়াগনস্টিকস</string>
+    <string name="demo_btn_add_breadcrumb">ব্রেডক্রাম্ব যোগ করুন</string>
+    <string name="demo_btn_custom_key">কাস্টম কী সেট করুন</string>
+    <string name="demo_btn_view_reports">সংরক্ষিত রিপোর্ট দেখুন</string>
+    <string name="demo_btn_clear_reports">সব রিপোর্ট মুছুন</string>
+
+    <string name="demo_handled_logged">নন-ফ্যাটাল এক্সেপশন সংরক্ষণ করা হয়েছে</string>
+    <string name="demo_breadcrumb_added">ব্রেডক্রাম্ব যোগ হয়েছে</string>
+    <string name="demo_custom_key_set">কাস্টম কী সেট হয়েছে</string>
+    <string name="demo_reports_cleared">সব রিপোর্ট মুছে ফেলা হয়েছে</string>
+    <string name="demo_notification_permission_denied">নোটিফিকেশন পারমিশন ছাড়া ব্যাকগ্রাউন্ড ক্র্যাশের নোটিফিকেশন দেখা যাবে না</string>
+
+    <string name="demo_reports_title">সংরক্ষিত ক্র্যাশ রিপোর্ট</string>
+    <string name="demo_reports_count">মোট %1$d টি রিপোর্ট</string>
+    <string name="demo_empty_reports">এখনো কোনো ক্র্যাশ রিপোর্ট সংরক্ষিত হয়নি।\n\nক্র্যাশ পরীক্ষার বাটন চেপে একটি রিপোর্ট তৈরি করুন।</string>
+    <string name="demo_badge_uncaught">আনকট</string>
+    <string name="demo_badge_handled">হ্যান্ডেলড</string>
+
+    <string name="demo_delete_title">রিপোর্ট মুছবেন?</string>
+    <string name="demo_delete_message">%1$s রিপোর্টটি স্থায়ীভাবে মুছে যাবে।</string>
+    <string name="demo_delete_confirm">মুছুন</string>
+    <string name="demo_cancel">বাতিল</string>
+    <string name="demo_clear_title">সব রিপোর্ট মুছবেন?</string>
+    <string name="demo_clear_message">সংরক্ষিত সব ক্র্যাশ রিপোর্ট স্থায়ীভাবে মুছে যাবে।</string>
+    <string name="demo_share_all">সব রিপোর্ট শেয়ার করুন</string>
+    <string name="demo_no_reports">কোনো রিপোর্ট নেই</string>
+
+    <string name="demo_report_detail_title">রিপোর্ট বিস্তারিত</string>
+    <string name="demo_report_missing">রিপোর্টটি পাওয়া যায়নি বা মুছে ফেলা হয়েছে।</string>
+    <string name="demo_copied">ক্লিপবোর্ডে কপি হয়েছে</string>
+    <string name="demo_share">শেয়ার করুন</string>
+    <string name="demo_copy">কপি করুন</string>
+</resources>

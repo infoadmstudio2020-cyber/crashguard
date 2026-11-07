@@ -1,0 +1,22 @@
+// Top-level build file for the CrashGuard multi-module project.
+plugins {
+    id 'com.android.application' version '8.3.2' apply false
+    id 'com.android.library' version '8.3.2' apply false
+}
+
+ext {
+    // Single source of truth for SDK levels. Every module reads these values so
+    // the library AAR and the demo app can never drift apart again.
+    compileSdkVersion = 34
+    minSdkVersion = 21
+    targetSdkVersion = 34
+
+    // Published coordinates (consumed by maven-publish and by the docs).
+    libraryGroup = 'com.roni.library'
+    libraryArtifact = 'crash-guard'
+    libraryVersion = '1.0.0'
+}
+
+tasks.register('clean', Delete) {
+    delete rootProject.layout.buildDirectory
+}

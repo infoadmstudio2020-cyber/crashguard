@@ -1,0 +1,42 @@
+<resources>
+    <string name="crashguard_app_name">CrashGuard</string>
+    <string name="crashguard_badge_text">CRASH INTERCEPTED</string>
+    <string name="crashguard_crash_title">Application Encountered a Problem</string>
+    <string name="crashguard_crash_subtitle">An unexpected error occurred. The application state has been preserved and diagnostic information was captured.</string>
+
+    <string name="crashguard_btn_restart">Restart Application</string>
+    <string name="crashguard_btn_close">Close App</string>
+    <string name="crashguard_btn_copy">Copy Report</string>
+    <string name="crashguard_btn_share">Share Diagnostics</string>
+    <string name="crashguard_btn_delete">Delete Report</string>
+
+    <string name="crashguard_section_meta">Device &amp; Session</string>
+    <string name="crashguard_section_breadcrumbs">Recent Breadcrumbs</string>
+    <string name="crashguard_section_stacktrace">Stack Trace</string>
+
+    <string name="crashguard_meta_time">Time</string>
+    <string name="crashguard_meta_type">Type</string>
+    <string name="crashguard_meta_thread">Thread</string>
+    <string name="crashguard_meta_app">App</string>
+    <string name="crashguard_meta_device">Device</string>
+    <string name="crashguard_meta_os">OS</string>
+    <string name="crashguard_meta_ram">RAM (MB)</string>
+    <string name="crashguard_meta_storage">Storage (MB)</string>
+
+    <string name="crashguard_no_breadcrumbs">No breadcrumbs were recorded before the crash.</string>
+    <string name="crashguard_report_unavailable">Crash Report Unavailable</string>
+    <string name="crashguard_report_unavailable_desc">Could not load the crash payload from disk.</string>
+    <string name="crashguard_report_deleted">Crash report deleted</string>
+    <string name="crashguard_copied_to_clipboard">Crash report copied to clipboard</string>
+
+    <string name="crashguard_notification_channel_name">Crash Diagnostics</string>
+    <string name="crashguard_notification_channel_desc">Alerts for caught crashes and exceptions</string>
+    <string name="crashguard_notification_title">App Crash Detected</string>
+    <string name="crashguard_notification_text">Tap to view crash diagnostic details and stacktrace.</string>
+
+    <!-- Kept for backwards compatibility with hosts that referenced the old tab labels. -->
+    <string name="crashguard_tab_summary">Summary</string>
+    <string name="crashguard_tab_stacktrace">Stack Trace</string>
+    <string name="crashguard_tab_device">Device &amp; OS</string>
+    <string name="crashguard_tab_breadcrumbs">Breadcrumbs</string>
+</resources>

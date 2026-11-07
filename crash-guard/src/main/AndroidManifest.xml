@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!-- Normal permissions for hardware & state queries -->
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <!-- Runtime permission on Android 13+; declared here so hosts inherit it. -->
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
+
+    <application>
+        <!--
+            Crash reporting activity. It runs in a dedicated process so it stays
+            alive after the host process is killed by the crash handler.
+        -->
+        <activity
+            android:name="com.roni.library.crashguard.DefaultCrashActivity"
+            android:process=":crash_guard_process"
+            android:exported="false"
+            android:launchMode="singleInstance"
+            android:excludeFromRecents="true"
+            android:finishOnTaskLaunch="true"
+            android:theme="@style/Theme.CrashGuard.CrashActivity" />
+    </application>
+
+</manifest>

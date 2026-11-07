@@ -1,0 +1,10 @@
+jdk:
+  - openjdk17
+
+before_install:
+  - chmod +x gradlew
+
+# JitPack runs this command, then serves the artifacts found in ~/.m2/repository.
+# Only the library module is published; the demo app is not part of the artifact.
+install:
+  - ./gradlew clean :crash-guard:assembleRelease :crash-guard:publishReleasePublicationToMavenLocal -x lint --stacktrace

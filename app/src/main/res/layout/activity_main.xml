@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/demo_bg"
+    android:orientation="vertical">
+
+    <com.google.android.material.appbar.MaterialToolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/demo_surface"
+        app:subtitle="@string/demo_subtitle"
+        app:subtitleTextColor="@color/demo_text_secondary"
+        app:title="@string/demo_title"
+        app:titleTextColor="@color/demo_text_primary" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:fillViewport="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="16dp">
+
+            <!-- স্ট্যাটাস কার্ড -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_card"
+                android:orientation="vertical"
+                android:padding="16dp">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/demo_section_status"
+                    android:textColor="@color/demo_text_secondary"
+                    android:textSize="12sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/tv_status"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:textColor="@color/demo_success"
+                    android:textSize="14sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/tv_config"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="6dp"
+                    android:fontFamily="monospace"
+                    android:textColor="@color/demo_text_secondary"
+                    android:textSize="11sp" />
+
+                <TextView
+                    android:id="@+id/tv_breadcrumb_count"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="6dp"
+                    android:textColor="@color/demo_accent"
+                    android:textSize="12sp" />
+            </LinearLayout>
+
+            <!-- ক্র্যাশ পরীক্ষা -->
+            <TextView
+                style="@style/Demo.SectionHeader"
+                android:text="@string/demo_section_crash_tests" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="4dp"
+                android:text="@string/demo_crash_hint"
+                android:textColor="@color/demo_text_secondary"
+                android:textSize="12sp" />
+
+            <Button
+                android:id="@+id/btn_crash_npe"
+                style="@style/Demo.CrashButton"
+                android:text="@string/demo_btn_npe" />
+
+            <Button
+                android:id="@+id/btn_crash_background"
+                style="@style/Demo.CrashButton"
+                android:text="@string/demo_btn_background" />
+
+            <Button
+                android:id="@+id/btn_crash_stack_overflow"
+                style="@style/Demo.CrashButton"
+                android:text="@string/demo_btn_stack_overflow" />
+
+            <Button
+                android:id="@+id/btn_crash_illegal_state"
+                style="@style/Demo.CrashButton"
+                android:text="@string/demo_btn_illegal_state" />
+
+            <Button
+                android:id="@+id/btn_crash_oom"
+                style="@style/Demo.CrashButton"
+                android:text="@string/demo_btn_oom" />
+
+            <Button
+                android:id="@+id/btn_handled_exception"
+                style="@style/Demo.CrashButton"
+                android:text="@string/demo_btn_handled" />
+
+            <!-- ডায়াগনস্টিকস -->
+            <TextView
+                style="@style/Demo.SectionHeader"
+                android:text="@string/demo_section_diagnostics" />
+
+            <Button
+                android:id="@+id/btn_add_breadcrumb"
+                style="@style/Demo.ActionButton"
+                android:text="@string/demo_btn_add_breadcrumb" />
+
+            <Button
+                android:id="@+id/btn_custom_key"
+                style="@style/Demo.ActionButton"
+                android:text="@string/demo_btn_custom_key" />
+
+            <Button
+                android:id="@+id/btn_view_reports"
+                style="@style/Demo.ActionButton"
+                android:text="@string/demo_btn_view_reports" />
+
+            <Button
+                android:id="@+id/btn_clear_reports"
+                style="@style/Demo.ActionButton"
+                android:text="@string/demo_btn_clear_reports" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="24dp" />
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>
