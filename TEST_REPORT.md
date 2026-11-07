@@ -30,7 +30,7 @@ NOT RUN = not executed · BLOCKED = cannot be executed in this environment.
 |---|---|---|---|
 | G-1 | Root `settings.gradle` evaluates (pluginManagement + dependencyResolutionManagement) | **PASS** | `BUILD SUCCESSFUL` |
 | G-2 | Both modules included (`:crash-guard`, `:app`) | **PASS** | Task graph contains both |
-| G-3 | `gradle.properties` coordinates parsed by the publication | **PASS** | POM contains `com.roni.library:crash-guard:1.0.0` |
+| G-3 | `gradle.properties` coordinates parsed by the publication | **PASS** | POM contains `com.roni.library:crash-guard:1.0.1` |
 | G-4 | `FAIL_ON_PROJECT_REPOS` enforced (no module-level repositories) | **PASS** | Configuration phase succeeded |
 
 ---
@@ -107,10 +107,10 @@ retention limit was exceeded. Fixed and re-verified.
 | # | Test | Status | Evidence |
 |---|---|---|---|
 | P-1 | `publishReleasePublicationToMavenLocal` | **PASS** | Task executed |
-| P-2 | AAR published | **PASS** | `crash-guard-1.0.0.aar` (47,419 B) |
-| P-3 | POM published and valid | **PASS** | `crash-guard-1.0.0.pom` (2,281 B) — correct group/artifact/version/packaging/license/developer/SCM |
-| P-4 | Sources JAR published | **PASS** | `crash-guard-1.0.0-sources.jar` (21,821 B) |
-| P-5 | Gradle module metadata published | **PASS** | `crash-guard-1.0.0.module` (3,562 B) |
+| P-2 | AAR published | **PASS** | `crash-guard-1.0.1.aar` (47,419 B) |
+| P-3 | POM published and valid | **PASS** | `crash-guard-1.0.1.pom` (2,281 B) — correct group/artifact/version/packaging/license/developer/SCM |
+| P-4 | Sources JAR published | **PASS** | `crash-guard-1.0.1-sources.jar` (21,821 B) |
+| P-5 | Gradle module metadata published | **PASS** | `crash-guard-1.0.1.module` (3,562 B) |
 | P-6 | Consumer resolves the artifact | **PASS** | `integration-test` compiled and packaged against `mavenLocal()` |
 
 ### Generated POM (excerpt)
@@ -118,7 +118,7 @@ retention limit was exceeded. Fixed and re-verified.
 ```xml
 <groupId>com.roni.library</groupId>
 <artifactId>crash-guard</artifactId>
-<version>1.0.0</version>
+<version>1.0.1</version>
 <packaging>aar</packaging>
 <name>CrashGuard</name>
 <licenses><license><name>The Apache License, Version 2.0</name></license></licenses>
@@ -167,7 +167,7 @@ adb shell am start -n com.roni.crashguard.demo.app.debug/com.roni.crashguard.dem
 
 # E-1..E-3: push and tag
 git push origin main
-git tag v1.0.0 && git push origin v1.0.0
+git tag v1.0.1 && git push origin v1.0.1
 ```
 
 ---

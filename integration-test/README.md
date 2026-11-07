@@ -26,7 +26,7 @@ repositories {
 }
 
 dependencies {
-    implementation 'com.roni.library:crash-guard:1.0.0'
+    implementation 'com.roni.library:crash-guard:1.0.1'
 }
 ```
 
@@ -34,5 +34,5 @@ To test the JitPack coordinate instead, replace `mavenLocal()` with
 `maven { url 'https://jitpack.io' }` and use:
 
 ```gradle
-implementation 'com.github.infoadmstudio2020-cyber.crash-guard:crash-guard:1.0.0'
+implementation 'com.github.infoadmstudio2020-cyber.crash-guard:crash-guard:1.0.1'
 ```

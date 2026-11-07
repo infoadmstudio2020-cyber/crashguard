@@ -1,8 +1,8 @@
 # CrashGuard — Final Audit Report
 
-**Project:** CrashGuard Android Crash Guard Library (`CrashGuard-1.0.0.zip`)
+**Project:** CrashGuard Android Crash Guard Library (`CrashGuard-1.0.1.zip`)
 **Audit date:** 2026-11-07
-**Audited version:** 1.0.0 → 1.0.0 (fixed)
+**Audited version:** 1.0.1 → 1.0.1 (fixed)
 **Toolchain used for verification:** JDK 17.0.13 (Temurin), Gradle 8.7, AGP 8.3.2,
 Android SDK Platform 34, Build-Tools 34.0.0, Linux x86_64.
 
@@ -90,7 +90,7 @@ defects meant that even a successful build would not have produced a working cra
 | P1 | `gradle.properties` | `GROUP=com.roni.crashguard.demo` — the **demo application id**, not the library group. |
 | P2 | `gradle.properties` | `POM_ARTIFACT_ID=com.roni.library.crashguard` — a package name used as an artifact id. |
 | P3 | `crash-guard/build.gradle` | `groupId` / `artifactId` / `version` hardcoded, ignoring `gradle.properties`. |
-| P4 | `README.md` | Documented `com.github.infoadmstudio2020-cyber:com.roni.library.crashguard:1.0.0` — a coordinate that can never resolve. |
+| P4 | `README.md` | Documented `com.github.infoadmstudio2020-cyber:com.roni.library.crashguard:1.0.1` — a coordinate that can never resolve. |
 | P5 | `jitpack.yml` | `install:` chained `:app:assembleRelease` with a `\|\|` fallback; a demo-app failure could abort the library publish. |
 | P6 | `scripts/build.sh` | Referenced a non-existent `:java-library` module. |
 | P7 | — | No GitHub Packages repository configured. |
@@ -273,7 +273,7 @@ TEST_REPORT.md
 
 ### 4.5 Publishing
 - `gradle.properties` now holds the real coordinates: `GROUP=com.roni.library`,
-  `POM_ARTIFACT_ID=crash-guard`, `VERSION_NAME=1.0.0`.
+  `POM_ARTIFACT_ID=crash-guard`, `VERSION_NAME=1.0.1`.
 - The publication reads those properties (no hardcoded values).
 - Full POM metadata: name, description, url, license, developer, SCM.
 - GitHub Packages repository wired conditionally on `GITHUB_REPOSITORY` / `GITHUB_ACTOR` /
@@ -281,7 +281,7 @@ TEST_REPORT.md
 - `jitpack.yml` publishes only the library module.
 - `scripts/build.sh` and `scripts/publish.sh` rewritten (no phantom `:java-library`).
 - `integration-test/` added: a standalone app that consumes
-  `com.roni.library:crash-guard:1.0.0` from `mavenLocal()`.
+  `com.roni.library:crash-guard:1.0.1` from `mavenLocal()`.
 
 ---
 
@@ -376,13 +376,13 @@ Additive changes only:
 | Maven Publish configuration | **PASS** | `maven-publish` + `singleVariant('release')` |
 | Group ID | **PASS** | `com.roni.library` |
 | Artifact ID | **PASS** | `crash-guard` |
-| Version | **PASS** | `1.0.0` |
-| Coordinates | **PASS** | `com.roni.library:crash-guard:1.0.0` |
+| Version | **PASS** | `1.0.1` |
+| Coordinates | **PASS** | `com.roni.library:crash-guard:1.0.1` |
 | Publishing repository | **PASS** | Maven Local + GitHub Packages (conditional) |
 | POM metadata | **PASS** | name, description, url, license, developer, SCM verified in the generated POM |
 | AAR packaging | **PASS** | `<packaging>aar</packaging>` |
-| Sources JAR | **PASS** | `crash-guard-1.0.0-sources.jar` (21 KB) |
-| Gradle module metadata | **PASS** | `crash-guard-1.0.0.module` |
+| Sources JAR | **PASS** | `crash-guard-1.0.1-sources.jar` (21 KB) |
+| Gradle module metadata | **PASS** | `crash-guard-1.0.1.module` |
 | Consumer dependency resolution | **PASS** | `integration-test` built against `mavenLocal()` |
 | JitPack compatibility (config) | **PASS** | `jitpack.yml` publishes only the library |
 | Git tag compatibility | **PASS** (config) | release workflow enforces `tag == VERSION_NAME` |
@@ -393,19 +393,19 @@ Additive changes only:
 ### Verified published artifacts
 
 ```
-~/.m2/repository/com/roni/library/crash-guard/1.0.0/
-  crash-guard-1.0.0.aar            47,419 bytes
-  crash-guard-1.0.0.pom             2,281 bytes
-  crash-guard-1.0.0.module          3,562 bytes
-  crash-guard-1.0.0-sources.jar    21,821 bytes
+~/.m2/repository/com/roni/library/crash-guard/1.0.1/
+  crash-guard-1.0.1.aar            47,419 bytes
+  crash-guard-1.0.1.pom             2,281 bytes
+  crash-guard-1.0.1.module          3,562 bytes
+  crash-guard-1.0.1-sources.jar    21,821 bytes
 ```
 
 ### Coordinates to use
 
 | Channel | Coordinate |
 |---|---|
-| Maven Local / GitHub Packages | `com.roni.library:crash-guard:1.0.0` |
-| JitPack (multi-module convention) | `com.github.infoadmstudio2020-cyber.crash-guard:crash-guard:1.0.0` |
+| Maven Local / GitHub Packages | `com.roni.library:crash-guard:1.0.1` |
+| JitPack (multi-module convention) | `com.github.infoadmstudio2020-cyber.crash-guard:crash-guard:1.0.1` |
 
 > JitPack derives its group from the repository owner and name, so the JitPack coordinate
 > is **not** the same as the Maven coordinate. Both are documented in the README.
@@ -479,7 +479,7 @@ dependencyResolutionManagement {
 
 // app/build.gradle
 dependencies {
-    implementation 'com.github.infoadmstudio2020-cyber.crash-guard:crash-guard:1.0.0'
+    implementation 'com.github.infoadmstudio2020-cyber.crash-guard:crash-guard:1.0.1'
 }
 ```
 
@@ -499,7 +499,7 @@ public class MyApp extends Application {
 
 ```bash
 ./gradlew :crash-guard:publishReleasePublicationToMavenLocal
-# -> ~/.m2/repository/com/roni/library/crash-guard/1.0.0/
+# -> ~/.m2/repository/com/roni/library/crash-guard/1.0.1/
 ```
 
 ### Publish to JitPack
@@ -507,7 +507,7 @@ public class MyApp extends Application {
 ```bash
 # 1. Bump VERSION_NAME in gradle.properties
 # 2. Commit and push
-git add gradle.properties && git commit -m "Release 1.0.0" && git push
+git add gradle.properties && git commit -m "Release 1.0.1" && git push
 # 3. Tag and push
 ./scripts/publish.sh --tag
 # 4. Open https://jitpack.io/#infoadmstudio2020-cyber/crash-guard and trigger the build

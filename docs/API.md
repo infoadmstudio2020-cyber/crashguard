@@ -1,7 +1,7 @@
 # CrashGuard API Reference
 
 Package: `com.roni.library.crashguard`
-Artifact: `com.roni.library:crash-guard:1.0.0`
+Artifact: `com.roni.library:crash-guard:1.0.1`
 
 ---
 
@@ -37,7 +37,7 @@ Restores the handler that was active before `install()` and clears the singleton
 public static boolean isInstalled()
 public static boolean isInitialized()          // alias of isInstalled()
 public static CrashGuard getInstance()         // null when not installed
-public String getLibraryVersion()              // "1.0.0"
+public String getLibraryVersion()              // "1.0.1"
 public CrashGuardConfig getConfig()
 public CrashReportStorage getStorage()
 public BreadcrumbTracker getBreadcrumbTracker()

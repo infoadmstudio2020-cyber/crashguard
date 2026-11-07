@@ -32,7 +32,7 @@ dependencyResolutionManagement {
 ```gradle
 // app/build.gradle
 dependencies {
-    implementation 'com.github.infoadmstudio2020-cyber.crash-guard:crash-guard:1.0.0'
+    implementation 'com.github.infoadmstudio2020-cyber.crash-guard:crash-guard:1.0.1'
 }
 ```
 
@@ -50,7 +50,7 @@ repositories {
 }
 
 dependencies {
-    implementation 'com.roni.library:crash-guard:1.0.0'
+    implementation 'com.roni.library:crash-guard:1.0.1'
 }
 ```
 

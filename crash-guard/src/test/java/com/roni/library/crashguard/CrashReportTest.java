@@ -16,7 +16,7 @@ public class CrashReportTest {
         report.setThreadId(1);
         report.setMainThread(true);
         report.setAppPackage("com.roni.crashguard.demo");
-        report.setAppVersionName("1.0.0");
+        report.setAppVersionName("1.0.1");
         report.setDeviceModel("Pixel 8 Pro");
         report.setDeviceManufacturer("Google");
 

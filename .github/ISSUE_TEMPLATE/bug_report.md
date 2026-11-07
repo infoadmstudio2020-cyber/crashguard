@@ -16,7 +16,7 @@ Steps to reproduce the behavior.
 What you expected to happen.
 
 **Environment**
-- Library version: 1.0.0
+- Library version: 1.0.1
 - Android version:
 - Device:
 

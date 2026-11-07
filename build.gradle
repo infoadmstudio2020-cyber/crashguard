@@ -14,7 +14,7 @@ ext {
     // Published coordinates (consumed by maven-publish and by the docs).
     libraryGroup = 'com.roni.library'
     libraryArtifact = 'crash-guard'
-    libraryVersion = '1.0.0'
+    libraryVersion = '1.0.1'
 }
 
 tasks.register('clean', Delete) {

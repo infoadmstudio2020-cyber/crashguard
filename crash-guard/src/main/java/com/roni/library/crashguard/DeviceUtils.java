@@ -25,7 +25,7 @@ public final class DeviceUtils {
         try {
             PackageManager pm = context.getPackageManager();
             PackageInfo info = pm.getPackageInfo(context.getPackageName(), 0);
-            return info.versionName != null ? info.versionName : "1.0.0";
+            return info.versionName != null ? info.versionName : "1.0.1";
         } catch (Exception e) {
             return "unknown";
         }

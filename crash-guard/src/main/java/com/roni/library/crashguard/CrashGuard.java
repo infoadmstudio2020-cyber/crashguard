@@ -29,7 +29,7 @@ import java.util.concurrent.ConcurrentHashMap;
 public final class CrashGuard {
 
     private static final String TAG = "CrashGuard";
-    private static final String LIBRARY_VERSION = "1.0.0";
+    private static final String LIBRARY_VERSION = "1.0.1";
 
     private static volatile CrashGuard instance;
     private static final Object INIT_LOCK = new Object();

@@ -2,9 +2,9 @@ name: Test
 
 on:
   push:
-    branches: [ main, master, develop ]
+    branches: [main, master, develop]
   pull_request:
-    branches: [ main, master, develop ]
+    branches: [main, master, develop]
   workflow_dispatch:
 
 permissions:
@@ -16,7 +16,7 @@ concurrency:
 
 jobs:
   unit-tests:
-    name: Unit tests
+    name: Library Unit Tests
     runs-on: ubuntu-latest
     timeout-minutes: 30
 
@@ -28,21 +28,36 @@ jobs:
         uses: actions/setup-java@v4
         with:
           java-version: '17'
-          distribution: 'temurin'
+          distribution: temurin
 
       - name: Set up Android SDK
-        uses: android-actions/setup-android@v3
+        uses: android-actions/setup-android@v4
+
+      - name: Install Android SDK packages
+        run: |
+          sdkmanager "platforms;android-34" "build-tools;34.0.0"
 
       - name: Set up Gradle
         uses: gradle/actions/setup-gradle@v4
 
-      - name: Grant execute permission for gradlew
+      - name: Grant execute permission
         run: chmod +x gradlew
 
-      - name: Run library unit tests
-        run: ./gradlew :crash-guard:testDebugUnitTest --stacktrace
+      - name: Verify Gradle
+        run: ./gradlew --version
 
-      - name: Publish test report
+      - name: Run library unit tests
+        run: |
+          ./gradlew :crash-guard:testDebugUnitTest \
+            --no-daemon \
+            --stacktrace
+
+      - name: Verify test results
+        if: success()
+        run: |
+          echo "Library unit tests completed successfully."
+
+      - name: Upload test reports
         if: always()
         uses: actions/upload-artifact@v4
         with:
@@ -53,8 +68,9 @@ jobs:
           if-no-files-found: warn
           retention-days: 14
 
-      - name: Fail if tests failed
+      - name: Report test failure
         if: failure()
         run: |
-          echo "::error::Unit tests failed. See the unit-test-reports artifact."
+          echo "::error::Library unit tests failed."
+          echo "Check the unit-test-reports artifact."
           exit 1

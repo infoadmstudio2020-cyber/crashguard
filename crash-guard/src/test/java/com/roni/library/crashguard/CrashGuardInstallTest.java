@@ -152,6 +152,6 @@ public class CrashGuardInstallTest {
     @Test
     public void testLibraryVersion() {
         CrashGuard guard = CrashGuard.install(context);
-        Assert.assertEquals("1.0.0", guard.getLibraryVersion());
+        Assert.assertEquals("1.0.1", guard.getLibraryVersion());
     }
 }

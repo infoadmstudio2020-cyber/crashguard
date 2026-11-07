@@ -5,10 +5,10 @@ This project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.htm
 
 ---
 
-## [1.0.0] — 2026-11-07
+## [1.0.1] — 2026-11-07
 
 First release that actually builds, publishes and passes its own test suite.
-The previous 1.0.0 archive did not compile; this entry documents the full repair.
+The previous 1.0.1 archive did not compile; this entry documents the full repair.
 
 ### Added
 
@@ -47,7 +47,7 @@ The previous 1.0.0 archive did not compile; this entry documents the full repair
   `withSourcesJar()` retained.
 - **Build:** `testOptions.unitTests.returnDefaultValues` and
   `includeAndroidResources` enabled.
-- **Publishing:** coordinates corrected to `com.roni.library:crash-guard:1.0.0`
+- **Publishing:** coordinates corrected to `com.roni.library:crash-guard:1.0.1`
   (previously `com.roni.crashguard.demo:com.roni.library.crashguard`).
 - **Publishing:** publication reads `GROUP` / `POM_ARTIFACT_ID` / `VERSION_NAME`
   from `gradle.properties` instead of hardcoding them.

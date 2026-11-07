@@ -2,9 +2,9 @@ name: Build
 
 on:
   push:
-    branches: [ main, master, develop ]
+    branches: [main, master, develop]
   pull_request:
-    branches: [ main, master, develop ]
+    branches: [main, master, develop]
   workflow_dispatch:
 
 permissions:
@@ -16,7 +16,7 @@ concurrency:
 
 jobs:
   build:
-    name: Assemble library and demo
+    name: Assemble Library and Demo
     runs-on: ubuntu-latest
     timeout-minutes: 30
 
@@ -28,25 +28,39 @@ jobs:
         uses: actions/setup-java@v4
         with:
           java-version: '17'
-          distribution: 'temurin'
+          distribution: temurin
 
       - name: Set up Android SDK
-        uses: android-actions/setup-android@v3
+        uses: android-actions/setup-android@v4
+          # Android SDK Command Line Tools and platform-tools
+
+      - name: Install Android SDK packages
+        run: |
+          sdkmanager "platforms;android-34" "build-tools;34.0.0"
+          sdkmanager --list_installed
 
       - name: Set up Gradle
         uses: gradle/actions/setup-gradle@v4
 
-      - name: Grant execute permission for gradlew
+      - name: Grant execute permission
         run: chmod +x gradlew
 
+      - name: Verify Gradle environment
+        run: |
+          java -version
+          ./gradlew --version
+
+      - name: Clean project
+        run: ./gradlew clean --no-daemon
+
       - name: Assemble release AAR
-        run: ./gradlew :crash-guard:assembleRelease --stacktrace
+        run: ./gradlew :crash-guard:assembleRelease --no-daemon --stacktrace
 
       - name: Assemble debug APK
-        run: ./gradlew :app:assembleDebug --stacktrace
+        run: ./gradlew :app:assembleDebug --no-daemon --stacktrace
 
       - name: Assemble release APK
-        run: ./gradlew :app:assembleRelease --stacktrace
+        run: ./gradlew :app:assembleRelease --no-daemon --stacktrace
 
       - name: Upload AAR
         uses: actions/upload-artifact@v4
@@ -62,4 +76,14 @@ jobs:
           name: demo-apks
           path: app/build/outputs/apk/**/*.apk
           if-no-files-found: error
+          retention-days: 14
+
+      - name: Upload build reports
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: build-reports
+          path: |
+            **/build/reports/
+          if-no-files-found: ignore
           retention-days: 14
